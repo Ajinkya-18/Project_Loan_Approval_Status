@@ -105,17 +105,26 @@ def preprocess_data(df, target:str='loan_status', mode:str='train'):
             ord_encoded_cols = ord_encoder.transform(df[ord_enc_cols])
             onehot_enc_df = pd.get_dummies(df[onehot_enc_cols], dtype=int)
 
-            df = df.join(onehot_enc_df, on='id', how='outer')
+            df = df.join(onehot_enc_df, how='outer')
             df.drop(onehot_enc_cols, axis=1, inplace=True)
 
             df['loan_grade'] = ord_encoded_cols
             df['cb_defaulter_on_file'] = lab_encoder.transform(np.ravel(df[label_enc_cols]))
 
-            loan_status = df.pop('loan_status')
-            df.insert(len(df.columns), 'loan_status', loan_status)
-
             df.drop(df.filter(regex='loan_intent_').columns, axis=1, inplace=True)
-            df.drop(drop_cols, axis=1, inplace=True)
+
+            home_ownership_cols = ['person_home_ownership_RENT', 'person_home_ownership_MORTGAGE', 'person_home_ownership_OWN']
+
+            for col in home_ownership_cols:
+                if col not in df.columns:
+                    df[col] = 0
+            
+            FEATURES_SEQUENCE = ['person_income', 'person_emp_length', 'loan_grade', 
+                                 'loan_amnt', 'loan_int_rate', 'loan_percent_income', 
+                                 'cb_defaulter_on_file', 'person_home_ownership_MORTGAGE', 
+                                 'person_home_ownership_OWN', 'person_home_ownership_RENT']
+            
+            df = df[FEATURES_SEQUENCE]
 
             df_scaled = scaler.transform(df)
             
@@ -180,5 +189,6 @@ def test_model(model, x_test):
         raise e
     
 #------------------------------------------------------------------------------------------------------------------------
+
 
 
