@@ -2,6 +2,9 @@
 
 This repository contains a small ML project that predicts whether a loan application will be approved. The analysis and experiments are available in the notebook `notebooks/Project_Notebook.ipynb`. The project includes reusable utilities, a training pipeline, saved model artifacts, and a Streamlit app for interactive inference.
 
+## Streamlit App Link
+[Loan Approval Predictor](https://loan-approval-status-predictor.streamlit.app/)
+
 ## Dataset
 
 This project uses the Kaggle "Playground Series - Season 4, Episode 10" dataset. Please cite or attribute the dataset if you reuse this work:
