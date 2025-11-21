@@ -2,8 +2,17 @@
 
 This repository contains a small ML project that predicts whether a loan application will be approved. The analysis and experiments are available in the notebook `notebooks/Project_Notebook.ipynb`. The project includes reusable utilities, a training pipeline, saved model artifacts, and a Streamlit app for interactive inference.
 
+---
+
 ## Streamlit App Link
 [Loan Approval Predictor](https://loan-approval-status-predictor.streamlit.app/)
+
+---
+
+### Hire me for your next AI Project on Fiverr: 
+[My Fiverr Profile](https://www.fiverr.com/s/ZmD23WR)
+
+---
 
 ## Dataset
 
@@ -12,6 +21,7 @@ This project uses the Kaggle "Playground Series - Season 4, Episode 10" dataset.
 - Kaggle competition / dataset: Playground Series - Season 4, Episode 10
 - URL: [Kaggle Dataset for Loan Approval Status Prediction](https://www.kaggle.com/competitions/playground-series-s4e10/data)
 
+---
 
 ## Project contents (high level)
 
@@ -22,6 +32,8 @@ This project uses the Kaggle "Playground Series - Season 4, Episode 10" dataset.
 - `app/app.py` - Streamlit app that loads a trained RandomForest model and provides an interactive UI for single-row inference.
 - `models/` - folder containing fitted transformers/encoders and trained model files created by the notebook or training pipeline.
 - `reports/` - visualizations exported by the notebook (correlation matrix, feature plots, confusion matrices, etc.).
+
+---
 
 ## Key implementation notes
 
@@ -34,6 +46,8 @@ This project uses the Kaggle "Playground Series - Season 4, Episode 10" dataset.
   - Dropping lower-importance columns such as `person_age`, `cb_person_cred_hist_length`, and `person_home_ownership_OTHER`.
   - Quantile transformation (QuantileTransformer) is used as a scaler for numeric features before training.
 
+---
+
 ## Saved artifacts created by the project
 
 - `models/ordinal_encoder.joblib` - fitted OrdinalEncoder for `loan_grade`.
@@ -44,6 +58,8 @@ This project uses the Kaggle "Playground Series - Season 4, Episode 10" dataset.
 - `models/trained_KNC.joblib` - trained KNeighborsClassifier.
 
 If these files are missing you can recreate them by running the notebook or `src/training_pipeline.py`.
+
+---
 
 ## How to run
 
@@ -102,14 +118,20 @@ Edge cases & assumptions
 - The helper `assert_path` in `src/utils.py` checks that file paths exist relative to the current working directory and that the path ends with `.csv` or `.joblib`. When saving models, ensure the `models/` folder exists and that working directory is the project root.
 - `preprocess_data(..., mode='inference')` will add missing one-hot columns for `person_home_ownership` (RENT/MORTGAGE/OWN) if they are not present in supplied input and will reorder features to the expected sequence before applying the saved QuantileTransformer.
 
+---
+
 ## Reproducing the notebook analysis
 
 Open `notebooks/Project_Notebook.ipynb` and run the cells top-to-bottom. The notebook performs EDA (correlation heatmap, histplots and boxplots), feature selection using mutual information, trains several classifiers, evaluates them, and saves multiple artifacts into `models/` and figures into `reports/`.
+
+---
 
 ## Troubleshooting
 
 - If the Streamlit app shows "Model not found", ensure you have run the training pipeline and the `models/` directory contains `trained_RFC.joblib` and the encoder/transformer files.
 - If `src/utils.assert_path` raises a ValueError when saving models, make sure the working directory is the repository root and `models/` exists.
+
+---
 
 ## Author
 
